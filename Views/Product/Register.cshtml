@@ -1,0 +1,43 @@
+@model MvcBasics.Models.ProductViewModel
+
+<!-- Form for registering a product -->
+<form asp-action="Register" method="post">
+    <!-- Product Name Input -->
+    <div class="form-group">
+        <label asp-for="ProductName" class="control-label"></label> <!-- Label for ProductName -->
+        <input asp-for="ProductName" class="form-control" /> <!-- Input for ProductName -->
+        <span asp-validation-for="ProductName" class="text-danger"></span> <!-- Validation message -->
+        <span asp-validation-for="ProductAlreadyExist" class="text-danger"></span> <!-- Custom error message -->
+    </div>
+
+    <!-- Price Input -->
+    <div class="form-group">
+        <label asp-for="Price" class="control-label"></label> <!-- Label for Price -->
+        <input asp-for="Price" type="number" class="form-control" /> <!-- Input for Price -->
+        <span asp-validation-for="Price" class="text-danger"></span> <!-- Validation message -->
+    </div>
+
+    <!-- Description Input -->
+    <div class="form-group">
+        <label asp-for="Description" class="control-label"></label> <!-- Label for Description -->
+        <textarea asp-for="Description" class="form-control"></textarea> <!-- Textarea for Description -->
+        <span asp-validation-for="Description" class="text-danger"></span> <!-- Validation message -->
+    </div>
+
+    <!-- Category Selection -->
+    <div class="form-group">
+        <label asp-for="Category" class="control-label"></label> <!-- Label for Category -->
+        <select asp-for="Category" class="form-control"> <!-- Dropdown for Category -->
+            <option value="">Choose a category</option>
+            <option value="Electronics">Electronics</option>
+            <option value="Clothes">Clothes</option>
+            <option value="Food">Food</option>
+        </select>
+        <span asp-validation-for="Category" class="text-danger"></span> <!-- Validation message -->
+    </div>
+
+    <!-- Submit Button -->
+    <div class="form-group mt-3">
+        <button type="submit" class="btn btn-primary">Register product</button>
+    </div>
+</form>

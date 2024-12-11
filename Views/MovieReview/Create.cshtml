@@ -1,0 +1,58 @@
+@model MvcBasics.Models.MovieReviewViewModel
+
+<h2>Review a Movie</h2>
+
+<form asp-action="Create" method="post">
+    <!-- Movie Title Field -->
+    <div class="form-group">
+        <label asp-for="MovieTitle" class="control-label"></label>
+        <input asp-for="MovieTitle" class="form-control" />
+        <span asp-validation-for="MovieTitle" class="text-danger"></span>
+        <!-- Displays validation errors for MovieTitle -->
+    </div>
+
+    <!-- Genres Section -->
+    <div class="form-group">
+        <label>Genres</label>
+        <!-- Loop through a list of genres and create checkboxes for each -->
+        @foreach (var genre in new[] { "Action", "Comedy", "Drama", "Horror", "Sci-Fi", "Romance", "Thriller",
+        "Documentary", "Animation" })
+        {
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="SelectedGenres" value="@genre" @(Model.SelectedGenres
+                != null && Model.SelectedGenres.Contains(genre) ? "checked" : "") />
+                <!-- Check the checkbox if the genre is already selected -->
+                <label class="form-check-label">@genre</label>
+            </div>
+        }
+        <span class="text-danger">
+            @Html.ValidationMessage("SelectedGenres", "", new { @class = "text-danger" })
+            <!-- Displays validation errors for SelectedGenres -->
+        </span>
+    </div>
+
+    <!-- Rating Field -->
+    <div class="form-group">
+        <label asp-for="Rating" class="control-label"></label>
+        <input asp-for="Rating" type="range" class="form-range" min="1" max="5" />
+        <span asp-validation-for="Rating" class="text-danger"></span> <!-- Displays validation errors for Rating -->
+    </div>
+
+    <!-- Review Text Field -->
+    <div class="form-group">
+        <label asp-for="Review" class="control-label"></label>
+        <textarea asp-for="Review" class="form-control"></textarea>
+        <span asp-validation-for="Review" class="text-danger"></span> <!-- Displays validation errors for Review -->
+    </div>
+
+    <!-- Recommend Checkbox -->
+    <div class="form-group form-check">
+        <input asp-for="Recommend" type="checkbox" class="form-check-input" />
+        <label asp-for="Recommend" class="form-check-label"></label>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="form-group mt-3">
+        <button type="submit" class="btn btn-primary">Submit Review</button>
+    </div>
+</form>

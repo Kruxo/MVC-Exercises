@@ -1,0 +1,34 @@
+﻿@model MvcBasics.Models.AppointmentViewModel
+
+
+<form asp-action="Book" method="post">
+    <div class="form-group">
+        <label asp-for="FullName" class="control-label"></label>
+        <input asp-for="FullName" class="form-control" />
+        <span asp-validation-for="FullName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Email" class="control-label"></label>
+        <input asp-for="Email" type="email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Date" class="control-label"></label>
+        <input asp-for="Date" type="date" class="form-control" />
+        <span asp-validation-for="Date" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="TimeSlot" class="control-label"></label>
+        <select asp-for="TimeSlot" class="form-control">
+            <option value="">Choose a time</option>
+            <option value="09:00-10:00">09:00-10:00</option>
+            <option value="10:00-11:00">10:00-11:00</option>
+            <option value="11:00-12:00">11:00-12:00</option>
+        </select>
+        <span asp-validation-for="TimeSlot" class="text-danger"></span>
+        <span asp-validation-for="AlreadyBookedTime" class="text-danger"></span>
+    </div>
+    <div class="form-group mt-3">
+        <button type="submit" class="btn btn-primary">Book</button>
+    </div>
+</form>

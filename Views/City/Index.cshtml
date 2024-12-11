@@ -1,0 +1,47 @@
+@model CityViewModel
+
+<h2>State: @Model.SelectedState</h2>
+<h2>City: @Model.SelectedCity</h2>
+<h2>Population: @Model.GetPopulation()?.ToString()</h2>
+
+<hr>
+<form method="get">
+    @* // Dropdown for selecting a state. Submits the form when a state is selected. *@
+    <select name="state" onchange="this.form.submit()">
+        <option value="">Select a state...</option>
+        @foreach (var state in Model.States)
+        {
+        // Mark the currently selected state as selected in the dropdown.
+            <option value="@state" selected="@(state == Model.SelectedState)">@state</option>
+        }
+    </select>
+</form>
+<hr>
+
+@if (!string.IsNullOrEmpty(Model.SelectedState))
+{
+    <form method="get">
+        @* // Hidden input to retain the selected state when submitting the city form. *@
+        <input type="hidden" name="state" value="@Model.SelectedState" />
+
+        @*  // Dropdown for selecting a city. Submits the form when a city is selected. *@
+        <select name="city" onchange="this.form.submit()">
+            <option>Select a city</option>
+            @foreach (var city in Model.CitiesForState())
+            {
+                // Mark the currently selected city as selected in the dropdown.
+                <option selected="@(city == Model.SelectedCity)" value=@city>@city</option>
+            }
+        </select>
+    </form>
+    <hr>
+}
+
+@if (Model.GetPopulation().HasValue)
+{
+    // Display the population of the selected city and state in an alert box.
+    <div class="alert alert-info">
+        Population of @Model.SelectedCity, @Model.SelectedState:
+        @Model.GetPopulation()!.Value.ToString("N0") people
+    </div>
+}
