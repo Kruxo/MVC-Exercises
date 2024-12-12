@@ -6,12 +6,10 @@
 
 <hr>
 <form method="get">
-    @* // Dropdown for selecting a state. Submits the form when a state is selected. *@
     <select name="state" onchange="this.form.submit()">
         <option value="">Select a state...</option>
         @foreach (var state in Model.States)
         {
-        // Mark the currently selected state as selected in the dropdown.
             <option value="@state" selected="@(state == Model.SelectedState)">@state</option>
         }
     </select>
