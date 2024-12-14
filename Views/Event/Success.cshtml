@@ -1,0 +1,10 @@
+@model MvcBasics.Models.EventViewModel
+
+<h2>Event Created Successfully!</h2>
+<p>Event Name: @Model.Name</p>
+<p>Organizer: @Model.OrganizerEmail</p>
+<p>Date: @Model.Date.ToString("d")</p>
+<p>Type: @Model.Type</p>
+<p>Expected Attendees: @Model.Attendees</p>
+<p>Website: @Model.Website</p>
+<p>Terms Accepted: @(Model.AgreeToTerms ? "Yes" : "No")</p>

@@ -35,6 +35,7 @@
     <div class="form-group">
         <label asp-for="Rating" class="control-label"></label>
         <input asp-for="Rating" type="range" class="form-range" min="1" max="5" step="1" value="@Model.Rating" />
+        <span class="ms-2" id="ratingValue">@Model.Rating</span>
         <span asp-validation-for="Rating" class="text-danger"></span> <!-- Displays validation errors for Rating -->
     </div>
 
@@ -56,3 +57,37 @@
         <button type="submit" class="btn btn-primary">Submit Review</button>
     </div>
 </form>
+
+@section Scripts {
+    @* Inkluderar script för att hantera klientvalidering: *@
+    <partial name="_ValidationScriptsPartial" />
+
+
+    @* Uppdater den lille siffran: *@
+    <script>
+        const ratingSlider = document.querySelector('#Rating');
+        const ratingValue = document.querySelector('#ratingValue');
+
+
+        ratingSlider.oninput = () => ratingValue.innerText = ratingSlider.value;
+    </script>
+
+
+    @*
+    Alternativa lösningar
+
+
+        // 1) Om du behöver flera rader javascript-kod
+        ratingSlider.oninput =  () => {
+                document.querySelector('#ratingValue').textContent = ratingSlider.value;
+        };
+
+
+        // 2) Add event listener och "function" istället för "arrow function"
+        document.querySelector('#Rating').addEventListener('input', function (e) {
+            document.querySelector('#ratingValue').textContent = e.target.value;
+        });
+
+
+     *@
+}
